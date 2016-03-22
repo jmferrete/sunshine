@@ -11,7 +11,7 @@
         tools:context="com.jmferrete.sunshine.MainActivity">
 
     <fragment android:layout_width="match_parent" android:layout_height="match_parent"
-              android:name="com.jmferrete.sunshine.MainActivity$PlaceholderFragment"
+              android:name="com.jmferrete.sunshine.ForecastFragment"
               android:id="@+id/fragment_main">
     </fragment>
 </FrameLayout>
