@@ -4,9 +4,7 @@ import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.jmferrete.sunshine.R;
@@ -52,11 +50,32 @@ public class ForecastFragment extends Fragment {
 		ListView myView = (ListView) rootView.findViewById(R.id.listview_forecast);
 		myView.setAdapter(forecastAdapter);
 
+		setHasOptionsMenu(true);
+
 		return myView;
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.forecast_fragment, menu);
+		super.onCreateOptionsMenu(menu,inflater);
+	}
 
-	class FetchWeatherClass extends AsyncTask<String, String, String> {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				FetchWeatherTask task = new FetchWeatherTask();
+
+				task.execute();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	class FetchWeatherTask extends AsyncTask<String, String, String> {
 
 		@Override
 		protected String doInBackground(String... args) {
@@ -72,7 +91,7 @@ public class ForecastFragment extends Fragment {
 				// Construct the URL for the OpenWeatherMap query
 				// Possible parameters are available at OWM's forecast API page, at
 				// http://openweathermap.org/API#forecast
-				URL url = new URL(args[0]);
+				URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?&q=madrid,es&units=metric&mode=json&cnt=7");
 
 				// Create the request to OpenWeatherMap, and open the connection
 				urlConnection = (HttpURLConnection) url.openConnection();
