@@ -1,6 +1,7 @@
 package com.jmferrete.sunshine;
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,7 +67,20 @@ public class ForecastFragment extends Fragment {
 		// Handle item selection
 		switch (item.getItemId()) {
 			case R.id.action_refresh:
-				FetchWeatherTask task = new FetchWeatherTask();
+
+				Uri.Builder builder = new Uri.Builder();
+				builder.scheme("http")
+						.authority("api.openweathermap.org")
+						.appendPath("data")
+						.appendPath("2.5")
+						.appendPath("forecast")
+						.appendPath("daily")
+						.appendQueryParameter("q", "madrid,es")
+						.appendQueryParameter("units", "metric")
+						.appendQueryParameter("mode", "json")
+						.appendQueryParameter("cnt", "7");
+				String myUrl = builder.build().toString();
+				FetchWeatherTask task = new FetchWeatherTask(myUrl);
 
 				task.execute();
 				return true;
@@ -76,6 +90,13 @@ public class ForecastFragment extends Fragment {
 	}
 
 	class FetchWeatherTask extends AsyncTask<String, String, String> {
+
+		private String requestUrl = "";
+
+		public FetchWeatherTask(String newUrl) {
+			super();
+			this.requestUrl = newUrl;
+		}
 
 		@Override
 		protected String doInBackground(String... args) {
@@ -91,7 +112,7 @@ public class ForecastFragment extends Fragment {
 				// Construct the URL for the OpenWeatherMap query
 				// Possible parameters are available at OWM's forecast API page, at
 				// http://openweathermap.org/API#forecast
-				URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?&q=madrid,es&units=metric&mode=json&cnt=7");
+				URL url = new URL(requestUrl);
 
 				// Create the request to OpenWeatherMap, and open the connection
 				urlConnection = (HttpURLConnection) url.openConnection();
