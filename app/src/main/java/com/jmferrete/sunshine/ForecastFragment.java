@@ -86,7 +86,7 @@ public class ForecastFragment extends Fragment {
 
 		private static final String FORMAT = "json";
 		private static final String UNITS = "metric";
-		private static final String APPID = "ef69fdd8093842ba4c2e5a8ff89cf416";
+		private static final String APPID = "";
 		private final Integer DAYS = 7;
 
 
