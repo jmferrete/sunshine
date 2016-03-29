@@ -35,16 +35,12 @@ public class ForecastFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		String[] data = {
-				"Today - Sunny - 88/63",
-				"Tomorrow - Foggy - 70/46",
-				"Weds - Cloudy - 72/63",
-				"Thurs - Rainy - 64/51",
-				"Fry - Foggy - 70/46",
-				"Sat - Sunny - 76/68"
+		String[] initialData = {
+				"Hello!, Welcome to Ferrete's Weather App.",
+				"Push menu button and refresh."
 		};
 
-		List<String> weekForecast = new ArrayList<>(Arrays.asList(data));
+		List<String> weekForecast = new ArrayList<>(Arrays.asList(initialData));
 
 		forecastAdapter = new ArrayAdapter<>(
 				getActivity(),
