@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.jmferrete.sunshine.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

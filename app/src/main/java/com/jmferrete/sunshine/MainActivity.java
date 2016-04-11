@@ -1,22 +1,9 @@
 package com.jmferrete.sunshine;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.*;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
