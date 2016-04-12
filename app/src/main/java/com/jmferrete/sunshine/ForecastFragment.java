@@ -58,12 +58,11 @@ public class ForecastFragment extends Fragment {
 		myView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				Context context = adapterView.getContext();
-				CharSequence text = "Hello toast!";
-				int duration = Toast.LENGTH_SHORT;
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+				Context context = getActivity();
+				String forecast = forecastAdapter.getItem(position);
+				Toast myToast = Toast.makeText(context, forecast, Toast.LENGTH_SHORT);
 
-				Toast myToast = Toast.makeText(context, text, duration);
 				myToast.show();
 			}
 		});
@@ -96,8 +95,8 @@ public class ForecastFragment extends Fragment {
 
 		private static final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
 		private static final String QUERY_PARAM = "q";
-		private static final String FORMAT_PARAM = "json";
-		private static final String UNITS_PARAM = "mode";
+		private static final String FORMAT_PARAM = "mode";
+		private static final String UNITS_PARAM = "units";
 		private static final String DAYS_PARAM = "cnt";
 		private static final String APPID_PARAM = "appid";
 
@@ -125,8 +124,8 @@ public class ForecastFragment extends Fragment {
 
 				Uri myUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
 						.appendQueryParameter(QUERY_PARAM, params[0])
-						.appendQueryParameter(FORMAT_PARAM, UNITS)
-						.appendQueryParameter(UNITS_PARAM, FORMAT)
+						.appendQueryParameter(FORMAT_PARAM, FORMAT)
+						.appendQueryParameter(UNITS_PARAM, UNITS)
 						.appendQueryParameter(DAYS_PARAM, Integer.toString(DAYS))
 						.appendQueryParameter(APPID_PARAM, APPID)
 						.build();
