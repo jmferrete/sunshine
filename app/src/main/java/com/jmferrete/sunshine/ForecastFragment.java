@@ -1,14 +1,17 @@
 package com.jmferrete.sunshine;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.*;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +55,18 @@ public class ForecastFragment extends Fragment {
 
 		ListView myView = (ListView) rootView.findViewById(R.id.listview_forecast);
 		myView.setAdapter(forecastAdapter);
+		myView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				Context context = adapterView.getContext();
+				CharSequence text = "Hello toast!";
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast myToast = Toast.makeText(context, text, duration);
+				myToast.show();
+			}
+		});
 
 		setHasOptionsMenu(true);
 
