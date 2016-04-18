@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
@@ -78,14 +77,18 @@ public class DetailActivity extends ActionBarActivity {
 
             Intent intent = getActivity().getIntent();
 
+            ifIntentShowDetailForecast(rootView, intent);
+
+            return rootView;
+        }
+
+        private void ifIntentShowDetailForecast(View rootView, Intent intent) {
             if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
                 String message = intent.getStringExtra(Intent.EXTRA_TEXT);
                 TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
                 textView.setTextSize(TEXT_SIZE);
                 textView.setText(message);
             }
-
-            return rootView;
         }
     }
 }
