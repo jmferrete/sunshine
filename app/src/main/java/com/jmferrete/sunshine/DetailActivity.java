@@ -77,10 +77,13 @@ public class DetailActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
             Intent intent = getActivity().getIntent();
-            String message = intent.getExtras().getString(Intent.EXTRA_TEXT);
-            TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
-            textView.setTextSize(TEXT_SIZE);
-            textView.setText(message);
+
+            if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
+                String message = intent.getStringExtra(Intent.EXTRA_TEXT);
+                TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
+                textView.setTextSize(TEXT_SIZE);
+                textView.setText(message);
+            }
 
             return rootView;
         }
