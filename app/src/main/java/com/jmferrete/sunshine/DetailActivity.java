@@ -65,7 +65,7 @@ public class DetailActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        private static final Integer TEXT_SIZE = 40;
+        private static final Integer TEXT_SIZE = 20;
 
         public PlaceholderFragment() {
         }
@@ -78,12 +78,9 @@ public class DetailActivity extends ActionBarActivity {
 
             Intent intent = getActivity().getIntent();
             String message = intent.getExtras().getString(Intent.EXTRA_TEXT);
-            TextView textView = new TextView(getActivity());
+            TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
             textView.setTextSize(TEXT_SIZE);
             textView.setText(message);
-
-            RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.forecast_detail);
-            layout.addView(textView);
 
             return rootView;
         }
