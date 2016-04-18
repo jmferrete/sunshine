@@ -16,14 +16,13 @@
 
 package com.jmferrete.sunshine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
 
@@ -66,6 +65,8 @@ public class DetailActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        private static final Integer TEXT_SIZE = 40;
+
         public PlaceholderFragment() {
         }
 
@@ -74,6 +75,16 @@ public class DetailActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+
+            Intent intent = getActivity().getIntent();
+            String message = intent.getExtras().getString(Intent.EXTRA_TEXT);
+            TextView textView = new TextView(getActivity());
+            textView.setTextSize(TEXT_SIZE);
+            textView.setText(message);
+
+            RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.forecast_detail);
+            layout.addView(textView);
+
             return rootView;
         }
     }

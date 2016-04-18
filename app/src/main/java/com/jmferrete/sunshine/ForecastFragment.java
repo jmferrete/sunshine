@@ -2,6 +2,7 @@ package com.jmferrete.sunshine;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -61,15 +62,25 @@ public class ForecastFragment extends Fragment {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 				Context context = getActivity();
 				String forecast = forecastAdapter.getItem(position);
-				Toast myToast = Toast.makeText(context, forecast, Toast.LENGTH_SHORT);
-
-				myToast.show();
+				launchDetailActivity(context, forecast);
 			}
 		});
 
 		setHasOptionsMenu(true);
 
 		return myView;
+	}
+
+	private void launchDetailActivity(Context context, String forecast) {
+		Intent detailActivityIntent = new Intent(context, DetailActivity.class)
+                .putExtra(Intent.EXTRA_TEXT, forecast);
+
+		startActivity(detailActivityIntent);
+	}
+
+	private void launchToast(Context context, String forecast) {
+		Toast myToast = Toast.makeText(context, forecast, Toast.LENGTH_SHORT);
+		myToast.show();
 	}
 
 	@Override
